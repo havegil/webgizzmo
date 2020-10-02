@@ -1,0 +1,71 @@
+
+
+@mixin getBladeBKg($bkgType:'blade-white'){
+    background-color: #ffffff;
+
+    @if $bkgType == 'dark' {
+        background-color: #323232;
+    }@else if $bkgType == 'dark-blue' {
+        background-color: #335878; 
+    }@else if $bkgType == 'dark-slate' {
+        background-color: #404753;  
+    }@else if $bkgType == 'lite-slate' {
+        background-color: #c7d7eb;        
+    }@else if $bkgType == 'grey-lite' {
+        background-color: #f7f7f7;        
+    }@else if $bkgType == 'grey-medium' {
+        background-color: #c4c4c4; 
+    }@else if $bkgType == 'olive' {
+        background-color: #bada55; 
+    }   
+}
+
+@mixin mxBackground ( $mxPath, $mxColor, $mxSize, $mxPosition, $mxWidth, $mxHeight, $mxRepeat ) {
+    background-image: url($mxPath); /* The image used */
+    background-color: $mxColor; /* Used if the image is unavailable */
+    height: $mxHeight; /* You must set a specified height */
+    background-position: $mxPosition; /* Center the image */
+    background-repeat: $mxRepeat; /* Do not repeat the image */
+    background-size: $mxSize; /* Resize the background image to cover the entire container */
+}
+
+
+/* Page links */
+
+@mixin Inlinks($Fsize:inherit, $LineH:inherit, $Colour:'#1473E6', $Lhover:'#aacf64'){
+    a{
+        text-decoration:none;   
+        font-size:$Fsize;  
+        line-height:$LineH;  
+        color:$Colour;
+
+        span{
+            padding-bottom:7px;
+        }
+
+        &:hover{
+            border-bottom:1px solid $Lhover;
+            color:$Lhover;
+        }
+    }
+} 
+
+/* Button secondary */
+
+@mixin btn-secondary($Fsize:inherit, $borderColor:inherit, $Pad:inherit, $Colour:#1473E6, $Thover:#aacf64, $Chover:#aacf64){
+    a{
+        text-decoration:none;   
+        font-size:$Fsize;  
+        line-height:$LineH;  
+        color:$Colour;
+
+        span{
+            padding-bottom:7px;
+        }
+
+        &:hover{
+            border-bottom:1px solid $Lhover;
+            color:$Lhover;
+        }
+    }
+} 
