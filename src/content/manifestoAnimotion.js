@@ -11,7 +11,7 @@ class ManifestoAnimotion extends React.Component{
     componentDidMount(){    
 
         // MouseOver
-        $('.spin-cog-wrap').on('mouseover', function(){
+        $('.spin-cog-wrap').on('mouseover', function(e){
             let itemParent = $(this).parent().parent();
 
             if(!$(itemParent).hasClass('active')){
@@ -21,13 +21,15 @@ class ManifestoAnimotion extends React.Component{
                 if(!$('.lrg-cog').hasClass('active')){
                     $('.lrg-cog').addClass('spin-lrg');
                 }
+
+               // moveSMcogByIndex(getCogIndex($(this)), false, false) ;  
             }
 
-            moveSMcogByIndex(getCogIndex($(this)),null) ;  
+            moveSMcogByIndex(getCogIndex($(this)), false, e) ;  
         });
 
        // Mouseout
-        $('.spin-cog-wrap').on('mouseout', function(){
+        $('.spin-cog-wrap').on('mouseout', function(e){
             let itemParent = $(this).parent().parent();
 
             if(!$(itemParent).hasClass('active')){
@@ -38,14 +40,14 @@ class ManifestoAnimotion extends React.Component{
                 if(!$('.lrg-cog').hasClass('active')){
                     $('.lrg-cog').removeClass('spin-lrg');
                 }
-            } 
+            }
             
-            moveSMcogByIndex(getCogIndex($(this)), false, true) ; 
+            moveSMcogByIndex(getCogIndex($(this)), false, e) ; 
         });
 
         // Click
         $(".spin-cog-wrap" ).each(function(index) {
-            $(this).on("click", function(){
+            $(this).on("click", function(e){
                 deactivate(true);
                
                 let itemParent = $(this).parent().parent();
@@ -53,37 +55,69 @@ class ManifestoAnimotion extends React.Component{
 
                 $('.lrg-cog').addClass("spin-lrg active");
 
-                moveSMcogByIndex(getCogIndex($(this)), true) ; 
+                moveSMcogByIndex(getCogIndex($(this)), true, e) ; 
             });
         });
 
-        function moveSMcogByIndex(matchedIndex, parentIsActive, isMsOut){
+
+        function moveSMcogByIndex(matchedIndex, parentIsActive, action){
+
+            let strActionType = action.type;
 
             $(".sm-cog").each(function(index) { 
-
-                // get and set active on small cogs
-                let isCurrentActive = false;
-
-                if($(this).hasClass('active')){
-                   return;
-                }
-
-                //current interaction, mouseover/mouseut/click
-                if(index == matchedIndex){
-                    if(parentIsActive){
-                        $(this).addClass("spin-rev active opaque");  
+                if(strActionType == 'mouseover'){
+                    if($(this).hasClass('active')){
+                        return;
                     }else{
-                        $(this).addClass("spin-rev opaque");
+                        if(index == matchedIndex){
+                            $(this).addClass("spin-rev opaque");  
+                        }
                     }
-
-                    if(isMsOut){
-                        $(this).removeClass("spin-rev opaque");
+                }else if(strActionType == 'mouseout'){
+                    if($(this).hasClass('active')){
+                        return;
+                    }else{
+                        if(index == matchedIndex){
+                            $(this).removeClass("spin-rev opaque"); 
+                        }
                     }
                 }else{
-                   // anything else
-                    $(this).removeClass("spin-rev opaque");
+                    $(this).removeClass("spin-rev active opaque");  
+                    if(index == matchedIndex){
+                        $(this).addClass("spin-rev active opaque"); 
+                    }
                 }
             });
+            
+            // $(".sm-cog").each(function(index) { 
+
+            //     // get and set active on small cogs
+            //     let isCurrentActive = false;
+
+            //     if($(this).hasClass('active') && parentIsActive){
+            //         console.log('cool');
+            //        return;
+            //     }
+
+            //     //current interaction, mouseover/mouseut/click
+            //     if(index == matchedIndex){
+            //         if(parentIsActive){
+            //             $(this).addClass("spin-rev active opaque");  
+            //         }else{
+            //             $(this).addClass("spin-rev opaque");
+            //         }
+
+            //         if(isMsOut){
+            //             $(this).removeClass("spin-rev opaque");
+            //         }
+            //     }else{
+            //        // anything else
+
+            //        if(!$(this).hasClass('active') && !parentIsActive && isMsOut){
+            //         $(this).removeClass("spin-rev opaque");
+            //        }
+            //     }
+           // });
         }
 
         function getCogIndex(cog){
@@ -182,10 +216,13 @@ class ManifestoAnimotion extends React.Component{
                     <div className="manifesto-igniter">
                         <div className="manifesto-ignit-container-sm">
                             <div className="sm-cog push-r-all">
-                                <img src={require('../images/icons/cog6.png')} alt=""/>
+                                {/* <img src={require('../images/icons/or-cog.png')} alt=""/> */}
+                                <div class="cogwheel cw-1">
+                                    <span></span>
+                                </div>
                             </div>
                             <div className="sm-cog push-r-mid">
-                                <img src={require('../images/icons/cog6.png')} alt=""/>
+                                <img src={require('../images/icons/fire-cog.png')} alt=""/>
                             </div>
                             <div className="sm-cog">
                                 <img src={require('../images/icons/cog6.png')} alt=""/>

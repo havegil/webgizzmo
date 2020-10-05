@@ -14,8 +14,7 @@ const config = {
     slidesToScroll: 1
 };
 
-const setSettings = ({  
-              
+const setSettings = ({                
     verticalSwiping: true,
     autoplay: true,
     autoplaySpeed: 500,
@@ -27,6 +26,13 @@ const setSettings = ({
 
 export class HeroSkillz extends React.Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.skillz = ['#Net','PHP','WordPress','Responsive Email','Interactive','Microsite', 'Python', 'Golang','NodeJS','Angular', 'React','SQL','NoSQL'];
+    }
+
+    
     getPlacement(){
         switch( this.props.position ){
             case 'right' : return 'keep-right'
@@ -34,34 +40,28 @@ export class HeroSkillz extends React.Component{
         }
     }
 
+    componentDidMount(){
+       
+    }
+
     render = () => {
         return (
             
             <div className= {`hero-skill ${this.getPlacement()}`}>
                 <Slider {...setSettings}>
-                    
-                   <p>#Net</p>
-                   <p>PHP</p>
-                   <p>WordPress</p>
-                   <p>Responsive Marup Emails</p>
-                   <p>Interactive</p>
-                   <p>Microsite</p>
-                   <p>Python</p>
-                   <p>Golang</p>
-                   <p>NodeJS</p>
-                   <p>Angular</p>
-                   <p>ReactJS</p>
-                   <p>SQL</p>
-                   <p>NoSQL</p>
-                   <p>AI</p>
-                   <p>CRM</p>
-                   <p>LMS</p>
-                   <p>eLearning</p>
-                   <p>SASS</p>
-                   <p>IOS</p>
-                   <p>Gamification</p>
-                   <p>ANDROID</p>
+             
+                    {
+                        this.skillz.map(skill => (
+                            <p>
+                              {skill}
+                            </p>
+                        ))
+                     
+                    }
+
+                   
                 </Slider>
+
 
                 <div className="text-fade"></div>
             </div>            
